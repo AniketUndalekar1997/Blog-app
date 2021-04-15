@@ -6,4 +6,14 @@
 ![Screenshot (24)](https://user-images.githubusercontent.com/80151279/114872907-61ac0800-9e18-11eb-869c-9a2def114d06.png)
 ![Screenshot (23)](https://user-images.githubusercontent.com/80151279/114872867-56f17300-9e18-11eb-9111-408dfe6ffda2.png)
 ![Screenshot (21)](https://user-images.githubusercontent.com/80151279/114872758-3e815880-9e18-11eb-93cc-a5d5e71e9b72.png)
-# Blog-app
+# Blog-app features
+1. A simple blog where user can add andd edit blog posts.
+2. dashboard section where author can see, edit and add blogposts.
+3. home page has all the posts by different authors/users with thier name and creation time mentioned in it.
+4. profile section allows user to see his profile and edit user informations, and can change his profile pics and user information.
+5. posts in home page has read button its basically a slug field on clicking, it will redirect to post details page.
+6. This is a blog app with user signup, login, logout forms whic uses djangos inbuilt authentication modules and forms
+7. post has like and unlike buttons where users can like and unlike posts.
+8. posts also has comment section where users can comment on blog posts, they can see their comments once it is approved by admin.
+
+
