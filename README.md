@@ -2,10 +2,10 @@
 # Blog-app features
 1. A simple blog where user can add and edit blog posts.
 2. dashboard section where author can see, edit and add blogposts.
-3. home page has all the posts by different authors/users with thier name and creation time mentioned in it.
+3. home page has all the posts by different authors/users with their name and creation time mentioned in it.
 4. profile section allows user to see his profile and edit user informations and profile pics.
 5. posts in home page has read button its basically a slug field on clicking, it will redirect to post details page.
-6. This is a blog app with user signup, login, logout forms which uses djangos inbuilt authentication modules and forms.
+6. This is a blog app with user signup, login, logout forms which uses Django inbuilt authentication modules and forms.
 7. App has search field where user can search posts and authors by name.
 8. search filter work by Q objects.
 9. post has like and unlike buttons where users can like and unlike posts.
