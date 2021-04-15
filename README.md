@@ -1,6 +1,6 @@
 
 # Blog-app features
-1. A simple blog where user can add andd edit blog posts.
+1. A simple blog where user can add and edit blog posts.
 2. dashboard section where author can see, edit and add blogposts.
 3. home page has all the posts by different authors/users with thier name and creation time mentioned in it.
 4. profile section allows user to see his profile and edit user informations, and can change his profile pics and user information.
