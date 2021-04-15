@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid jumbo-color ">
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mt-0 left top">
+      <div class="card-body">
+
+        <h1 class="display-4 font-weight-bold">{% block title %} {{ post.title }} {% endblock title %}</h1>
+          {% if post.image %}
+          <br>
+        <img class="card-img-top" src="{{post.image.url}}">
+          <br><br>
+          {% endif %}
+        <a href="{{ post.author.profile.image.url }} " target="_blank"> <img src="{{ post.author.profile.image.url }} " style="height: 65px;width: 65px;margin-right: 16px;" alt="" class="article-img rounded-circle img-thumbnail img-fluid shadow"></a>
+          <p class="card-text text-muted h5" href="">Author: {{ post.author }} | {{ post.created_on }}</p>
+          <p class="card-text">{{ post.desc | linebreaksbr }}</p>
+      </div>
+      <!--    like section-->
+      <div id="like-section" class="col-md-9 mt-0">
+      <hr>
+          {% include 'like_post.html' %}
+      </div>
+    </div>
+
+<!--  comments-->
+  <div class="col-md-9 mt-0">
+      <div class="card-body">
+            <br>
+    <br>
+        <!-- comments -->
+
+        <h3>{{ comments.count }} comments</h3>
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  <div class="col-md-9 mt-0">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <hr>
+        <h3>Leave a comment</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form | crispy }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+            $('.like-form').submit(function(e){
+                e.preventDefault()
+                
+                const post_id = $(this).attr('id')
+
+                const likeText = $(`.like-btn${post_id}`).text()
+              
+                const trim = $.trim(likeText)
+
+                const url = $(this).attr('action')
+
+                let res;
+                const likes = $(`.like-count${post_id}`).text()
+
+                const trimCount = parseInt(likes)
+                console.log(trimCount)
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                        'post_id':post_id,
+                    },
+                    success: function(response) {
+                        if(trim === 'Unlike') {
+                            $(`.like-btn${post_id}`).text('Like')
+                            res = trimCount - 1 
+                        } else {
+                            $(`.like-btn${post_id}`).text('Unlike')
+                            res = trimCount + 1
+                        }
+
+                        $(`.like-count${post_id}`).text(res +' '+ 'Likes')
+                    },
+                    error: function(response) {
+                        console.log('error', response)
+                    }
+                })
+            })
+    </script>
+{% endblock scripts %}

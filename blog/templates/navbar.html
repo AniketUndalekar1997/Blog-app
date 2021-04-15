@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#">Blog App</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle-navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="/"> Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="">About</a>
+			</li>
+
+			{% if request.user.is_authenticated %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+			</li>
+
+
+			<li class="nav-item dropdown" style="right:0;">
+				<a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"> {{ user.username }}</a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          			<a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+          			<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        		</div>
+			</li>
+
+			{% else %}
+
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'signup' %}">Signup</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'login' %}">Login</a>
+			</li>
+			{% endif %}
+
+			<!--search form-->
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<li class="nav-item">
+				<form class="form-inline" id="searchform" action="{% url 'search' %}" method="get">
+                    <input type="text" name="q" type="text" class="form-control mr-sm-2" value="{{ request.GET.q }}" placeholder="Search Here..." />
+                    <button type="button" onclick="searchform.submit()" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+                </form>
+			</li>
+
+		</ul>
+	</div>
+</nav>
